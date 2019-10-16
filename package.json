@@ -1,0 +1,29 @@
+{
+  "name": "task03",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "start": "tsc src/app node src/app",
+    "type": "git",
+    "url": "git+https://github.com/Abanoub321/task03.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abanoub321/task03/issues"
+  },
+  "homepage": "https://github.com/Abanoub321/task03#readme",
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "mysql": "^2.17.1",
+    "typeorm": "^0.2.19"
+  }
+}
