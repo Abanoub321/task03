@@ -22,19 +22,26 @@ createConnection({
     let memberRepo = connection.getRepository(Members);
 
     app.get('/',async (req,res)=>{
-    
-    let savedmembers = await memberRepo.find();
-    console.log('Members deliverd');
-        res.send(savedmembers);
+      let savedmembers = await memberRepo.find();
+        if(savedmembers.length<1)
+         {
+         res.send("No members exists");
+        }else{
+         res.send(savedmembers);
+        }
     });
 
     app.get('/:id',async(req,res)=>{
-    let id:number = parseInt(req.params.id);
-    let member = await memberRepo.findOne(id);
-    res.send(member);
-     });
+        let id:number = parseInt(req.params.id);
+        let member = await memberRepo.findOne(id);
+        if(member === undefined){
+        res.send("Doesn't Exist");
+        }else{
+            res.send(member);
+        }
+    });
 
-     app.use(express.json());
+    app.use(express.json());
 
      app.post('/',async (req,res)=>{
         let newMember:Members = req.body;
@@ -45,18 +52,27 @@ createConnection({
     app.put('/:id',async(req,res)=>{
         let id:number = parseInt(req.params.id);
         let newMember = await memberRepo.findOne(id);
-        newMember.name = req.body.name;
-        newMember.committee = req.body.committee;
-        newMember.phone = req.body.phone;
-        newMember.email =req.body.email;
-        await memberRepo.save(newMember);
-        res.send(newMember);
+        if(newMember === undefined){
+            res.send("Doesn't Exist");
+        }else{
+            newMember.name = req.body.name;
+            newMember.committee = req.body.committee;
+            newMember.phone = req.body.phone;
+            newMember.email =req.body.email;
+            await memberRepo.save(newMember);
+            res.send(newMember);
+        }
+       
     });
 
     app.delete('/:id',async(req,res)=>{
         let id:number = parseInt(req.params.id);
         let removedMember = await memberRepo.findOne(id);
-        await memberRepo.remove(removedMember);
-        res.send("Deleted..");
+        if(removedMember===undefined){
+            res.send("This member doesn't exist already");
+        }else{
+            await memberRepo.remove(removedMember);
+            res.send("Deleted..");
+        }
     });
 }).catch(error => console.log(error));
