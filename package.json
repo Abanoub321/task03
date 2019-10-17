@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
+  "scripts": { 
+    "build": "tsc -p ./src/app.ts",
+    "start": "ts-node ./src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "start": "tsc src/app node src/app",
     "type": "git",
     "url": "git+https://github.com/Abanoub321/task03.git"
   },
